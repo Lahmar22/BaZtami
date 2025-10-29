@@ -66,23 +66,8 @@
                         </button>
 
                     </div>
-
-
-
-                    <div id="card2" class="badge text-black border border-primary w-50">
-                        <p>Compte sur carnet</p>
-                        <p>79236349636384</p>
-                        <p>Solde</p>
-                        <p><span id="money2" class="money2">****</span></p>
-                        <button id="toggleEye2" class="btn btn-outline-primary btn-sm" aria-pressed="false"
-                            aria-controls="price" aria-label="Show price">
-                            <i id="eyeIcon2" class="bi bi-eye"></i>
-                        </button>
-
-
-                    </div>
                 </div>
-                <div class="d-flex p-2 gap-5">
+                <div class="d-grid p-2 gap-5">
                     <div class="badge text-black border border-primary w-50">
                         <div class="text-black">
                             <h4>Operations</h4>
@@ -99,6 +84,13 @@
                                     <input id="montant" type="number" class="form-control" placeholder="Montant (DH)"
                                         style="height:45px;">
                                 </div>
+                                <div class="col-md-3">
+                                    <select class="form-select" name="typemontant" id="typemontant">
+                                        <option selected>Type d'operation</option>
+                                        <option value="1">Revenus</option>
+                                        <option value="2">Dépenses</option>
+                                    </select>
+                                </div>
                                 <div class="col-md-2 d-grid">
                                     <button id="addBtn" class="btn btn-success" style="height:45px;">Ajouter</button>
                                 </div>
@@ -108,46 +100,6 @@
                         </div>
 
                     </div>
-
-
-                    <div class="badge text-black border border-primary w-50">
-                        <div class="text-black">
-                            <h4>Operations</h4>
-                        </div>
-                        <div class="d-grid gap-2 justify-content-center">
-                            <div class="d-flex border border-primary gap-5 justify-content-center p-2">
-                                <h5 class="text-black">Paiment recharge</h5>
-                                <h5 class="text-danger">- 5384</h5>
-                            </div>
-                            <div class="d-flex border border-primary gap-5 justify-content-center p-2">
-                                <h5 class="text-black">Virment youcode</h5>
-                                <h5 class="text-success">+ 1000</h5>
-                            </div>
-                            <div class="d-flex border border-primary gap-5 justify-content-center p-2">
-                                <h5 class="text-black">Virment youcode</h5>
-                                <h5 class="text-success">+ 1000</h5>
-                            </div>
-                            <div class="d-flex border border-primary gap-5 justify-content-center p-2">
-                                <h5 class="text-black">Virment youcode</h5>
-                                <h5 class="text-success">+ 1000</h5>
-                            </div>
-                            <div class="d-flex border border-primary gap-5 justify-content-center p-2">
-                                <h5 class="text-black">Virment youcode</h5>
-                                <h5 class="text-success">+ 1000</h5>
-                            </div>
-                            <div class="d-flex border border-primary gap-5 justify-content-center p-2">
-                                <h5 class="text-black">Virment youcode</h5>
-                                <h5 class="text-success">+ 1000</h5>
-                            </div>
-                            <div class="d-flex border border-primary gap-5 justify-content-center p-2">
-                                <h5 class="text-black">Virment youcode</h5>
-                                <h5 class="text-success">+ 1000</h5>
-                            </div>
-
-                        </div>
-
-                    </div>
-
 
                 </div>
 

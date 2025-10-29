@@ -6,13 +6,15 @@ const money2 = document.getElementById('money2');
 const toggleEye2 = document.getElementById('toggleEye2');
 const eyeIcon2 = document.getElementById('eyeIcon2');
 
-const actualMoney = '73673123.45 MAD';
+let actualMoney =0;
 const actualMoney2 = '73673123.45 MAD';
 let visible = false;
 
+
+
 toggleEye.addEventListener('click', () => {
     visible = !visible;
-    money.textContent = visible ? actualMoney : '******';
+    money.textContent = visible ? actualMoney : '****';
 
 
     money.style.color = visible ? 'green' : 'black';
@@ -24,7 +26,7 @@ toggleEye.addEventListener('click', () => {
 
 toggleEye2.addEventListener('click', () => {
     visible = !visible;
-    money2.textContent = visible ? actualMoney : '******';
+    money2.textContent = visible ? actualMoney2 : '****';
 
 
     money2.style.color = visible ? 'green' : 'black';
@@ -41,18 +43,27 @@ const liste = document.getElementById('listeVersements');
 
 addBtn.addEventListener('click', () => {
     const nom = nomVersement.value.trim();
-    const prix = montant.value.trim();
+    const prix = parseFloat(montant.value.trim()); 
+    const date = new Date();
+    const dateStr = date.toLocaleDateString('fr-FR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
 
     if (nom === '' || prix === '') {
         alert("Veuillez remplir les deux champs !");
         return;
     }
-
+    actualMoney += prix;
+    
     const li = document.createElement('li');
     li.className = 'list-group-item d-flex justify-content-between align-items-center';
     li.innerHTML = `
-        <div>
-            <strong>${nom}</strong> — <span class="text-success fw-bold">${prix} DH</span>
+        <div class="card1 d-flex gap-5">
+            <span><strong>${nom}</strong> | <strong class="text-success">+${prix} DH</strong></span>
+            <p >${dateStr}</p>
+            
         </div>
         <div class="btn-group">
             <button class="btn btn-warning btn-sm">Modifier</button>
@@ -65,6 +76,9 @@ addBtn.addEventListener('click', () => {
         if (confirm('Voulez-vous vraiment supprimer ce versement ?')) {
             li.remove();
         }
+        
+        actualMoney -= prix;
+        
     });
     const modifyBtn = li.querySelector('.btn-warning');
     modifyBtn.addEventListener('click', () => {
