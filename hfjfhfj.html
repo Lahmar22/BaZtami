@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mini ToDo JS</title>
+</head>
+
+<body>
+    <h2>To-Do List</h2>
+    <div class="d-flex">
+        <input id="taskInput" placeholder="Nouvelle tâche">
+        <button id="addBtn">Ajouter</button>
+        <ul id="tasks"></ul>
+    </div>
+
+    <script>
+        const input = document.getElementById('taskInput');
+        const addBtn = document.getElementById('addBtn');
+        const liste1 = document.getElementById('liste1');
+
+        addBtn.addEventListener('click', () => {
+            const text = input.value.trim();
+            if (text === '') return;
+            const li = document.createElement('li');
+            li.textContent = text;
+            li.addEventListener('click', () => li.remove());
+            liste1.appendChild(li);
+            input.value = '';
+        });
+    </script>
+</body>
+
+</html>

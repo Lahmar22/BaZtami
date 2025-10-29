@@ -13,11 +13,11 @@ let visible = false;
 toggleEye.addEventListener('click', () => {
     visible = !visible;
     money.textContent = visible ? actualMoney : '******';
-    
-   
+
+
     money.style.color = visible ? 'green' : 'black';
-    
-   
+
+
     eyeIcon.classList.toggle('bi-eye');
     eyeIcon.classList.toggle('bi-eye-slash');
 });
@@ -25,11 +25,78 @@ toggleEye.addEventListener('click', () => {
 toggleEye2.addEventListener('click', () => {
     visible = !visible;
     money2.textContent = visible ? actualMoney : '******';
-    
-   
+
+
     money2.style.color = visible ? 'green' : 'black';
-    
-   
+
+
     eyeIcon2.classList.toggle('bi-eye');
     eyeIcon2.classList.toggle('bi-eye-slash');
+});
+
+const nomVersement = document.getElementById('nomVersement');
+const montant = document.getElementById('montant');
+const addBtn = document.getElementById('addBtn');
+const liste = document.getElementById('listeVersements');
+
+addBtn.addEventListener('click', () => {
+    const nom = nomVersement.value.trim();
+    const prix = montant.value.trim();
+
+    if (nom === '' || prix === '') {
+        alert("Veuillez remplir les deux champs !");
+        return;
+    }
+
+    const li = document.createElement('li');
+    li.className = 'list-group-item d-flex justify-content-between align-items-center';
+    li.innerHTML = `
+        <div>
+            <strong>${nom}</strong> — <span class="text-success fw-bold">${prix} DH</span>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-warning btn-sm">Modifier</button>
+            <button class="btn btn-danger btn-sm">Supprimer</button>
+        </div>
+    `;
+
+    const deleteBtn = li.querySelector('.btn-danger');
+    deleteBtn.addEventListener('click', () => {
+        if (confirm('Voulez-vous vraiment supprimer ce versement ?')) {
+            li.remove();
+        }
+    });
+    const modifyBtn = li.querySelector('.btn-warning');
+    modifyBtn.addEventListener('click', () => {
+        const span = li.querySelector('span');
+        const [oldNom, oldMontant] = span.textContent.split('—').map(s => s.trim());
+
+        span.innerHTML = `
+      <input type="text" class="form-control form-control-sm w-50 d-inline" value="${oldNom}">
+      <input type="number" class="form-control form-control-sm w-25 d-inline ms-2" value="${oldMontant.replace('DH', '').trim()}">
+      <button class="btn btn-success btn-sm ms-2">save</button>
+    `;
+
+        const saveBtn = span.querySelector('button');
+        const newNomInput = span.querySelector('input[type="text"]');
+        const newMontantInput = span.querySelector('input[type="number"]');
+
+
+        saveBtn.addEventListener('click', () => {
+            const newNom = newNomInput.value.trim();
+            const newMontant = newMontantInput.value.trim();
+
+            if (newNom === '' || newMontant === '') {
+                alert('Champs vides interdits.');
+                return;
+            }
+
+            span.innerHTML = `<strong>${newNom}</strong> — ${newMontant} DH`;
+        });
+    });
+
+    liste.appendChild(li);
+
+    nomVersement.value = '';
+    montant.value = '';
 });
