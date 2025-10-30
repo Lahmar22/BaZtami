@@ -1,6 +1,4 @@
-/* ==============================
-   ELEMENT SELECTORS
-==============================*/
+
 const money1 = document.getElementById("money1");
 const money2 = document.getElementById("money2");
 const money3 = document.getElementById("money3");
@@ -22,9 +20,6 @@ const editName = document.getElementById("editName");
 const editAmount = document.getElementById("editAmount");
 const editType = document.getElementById("editType");
 
-/* ==============================
-   GLOBAL VARIABLES
-==============================*/
 let versements = JSON.parse(localStorage.getItem("versements") || "[]");
 
 let visible = {
@@ -39,9 +34,7 @@ let totals = {
     depenses: 0
 };
 
-/* ==============================
-   HELPERS
-==============================*/
+
 function saveToLocalStorage() {
     localStorage.setItem("versements", JSON.stringify(versements));
 
@@ -58,9 +51,7 @@ function toggleVisibility(stateKey, element, value, icon) {
     icon.classList.toggle("bi-eye-slash");
 }
 
-/* ==============================
-   TOTALS CALCULATION & UI UPDATE
-==============================*/
+
 function updateTotals() {
     let totalRevenus = 0, totalDepenses = 0;
 
@@ -71,12 +62,11 @@ function updateTotals() {
 
     const solde = totalRevenus - totalDepenses;
 
-    // Save into global totals object for eye toggle usage
+ 
     totals.revenus = totalRevenus;
     totals.solde = solde;
     totals.depenses = totalDepenses;
 
-    // Update visible UI
     money1.textContent = visible.revenus ? `+${totalRevenus} MAD` : "****";
     money2.textContent = visible.solde ? `${solde} MAD` : "****";
     money3.textContent = visible.depenses ? `-${totalDepenses} MAD` : "****";
@@ -90,9 +80,6 @@ function updateTotals() {
 }
 
 
-/* ==============================
-   RENDER LIST
-==============================*/
 function renderVersements() {
     const list = document.getElementById("listeVersements");
     list.innerHTML = "";
@@ -120,9 +107,7 @@ function renderVersements() {
     updateTotals();
 }
 
-/* ==============================
-   ADD VERSEMENT
-==============================*/
+
 addBtn.addEventListener("click", () => {
     const nom = nomVersement.value.trim();
     const montantValue = parseFloat(montant.value);
@@ -150,9 +135,7 @@ addBtn.addEventListener("click", () => {
     typeSelect.value = "";
 });
 
-/* ==============================
-   DELETE
-==============================*/
+
 function deleteVersement(index) {
     if (!confirm("Voulez-vous vraiment supprimer ce versement ?")) return;
     versements.splice(index, 1);
@@ -160,9 +143,7 @@ function deleteVersement(index) {
     renderVersements();
 }
 
-/* ==============================
-   EDIT
-==============================*/
+
 function editVersement(index) {
     document.getElementById("editId").value = index;
     editName.value = versements[index].nom;
@@ -185,9 +166,7 @@ document.getElementById("saveEditBtn").addEventListener("click", () => {
     bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
 });
 
-/* ==============================
-   EYE TOGGLES
-==============================*/
+
 toggleEye1.onclick = () =>
     toggleVisibility("revenus", money1, `+${totals.revenus} MAD`, eyeIcon1);
 
@@ -197,7 +176,5 @@ toggleEye2.onclick = () =>
 toggleEye3.onclick = () =>
     toggleVisibility("depenses", money3, `-${totals.depenses} MAD`, eyeIcon3);
 
-/* ==============================
-   INIT
-==============================*/
+
 document.addEventListener("DOMContentLoaded", renderVersements);
