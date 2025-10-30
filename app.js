@@ -10,9 +10,9 @@ const money3 = document.getElementById('money3');
 const toggleEye3 = document.getElementById('toggleEye3');
 const eyeIcon3 = document.getElementById('eyeIcon3');
 
-let TotalRevenus = 0 ;
+let TotalRevenus = 0;
 let SoldeNet = 0;
-let TotalDepenses =0 ;
+let TotalDepenses = 0;
 
 let visible1 = false;
 let visible2 = false;
@@ -64,7 +64,7 @@ const liste = document.getElementById('listeVersements');
 
 addBtn.addEventListener('click', () => {
     const nom = nomVersement.value.trim();
-    const prix = parseFloat(montant.value.trim()); 
+    const prix = parseFloat(montant.value.trim());
     const date = new Date();
     const type = typeSelect.value;
 
@@ -78,19 +78,17 @@ addBtn.addEventListener('click', () => {
         alert("Veuillez remplir tous les champs !");
         return;
     }
-    
-    
+
+
     const typeText = type === "1" ? "Revenus" : "Dépenses";
     const color = type === "1" ? "text-success" : "text-danger";
-    
-    if(typeText=='Revenus'){
-        TotalRevenus +=prix;
-        SoldeNet += prix;
-    }
-    else if(typeText=='Dépenses'){
-        SoldeNet -= prix;
-        TotalDepenses +=prix;
 
+    if (typeText === 'Revenus') {
+        TotalRevenus += prix ;
+        SoldeNet += prix;
+    } else if (typeText === 'Dépenses') {
+        TotalDepenses += prix;
+        SoldeNet -= prix;
     }
     const li = document.createElement('li');
     li.className = 'list-group-item d-flex justify-content-between align-items-center';
@@ -110,11 +108,19 @@ addBtn.addEventListener('click', () => {
     const deleteBtn = li.querySelector('.btn-danger');
     deleteBtn.addEventListener('click', () => {
         if (confirm('Voulez-vous vraiment supprimer ce versement ?')) {
+            if (typeText === 'Revenus') {
+                TotalRevenus -= prix;
+                SoldeNet -= prix;
+            } else {
+                TotalDepenses -= prix;
+                SoldeNet += prix;
+            }
             li.remove();
+
         }
-        
-        actualMoney -= prix;
-        
+
+
+
     });
     const modifyBtn = li.querySelector('.btn-warning');
     modifyBtn.addEventListener('click', () => {
