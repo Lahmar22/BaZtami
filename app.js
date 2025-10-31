@@ -89,14 +89,14 @@ function renderVersements() {
         const color = v.type === "Revenus" ? "text-success" : "text-danger";
         const sign = v.type === "Revenus" ? "+" : "-";
 
-        li.className = "list-group-item d-flex justify-content-between align-items-center p-3 mb-3 rounded-4 shadow bg-white border-0";
+        li.className = "list-group d-grid justify-content-center align-items-center p-3 mb-3 rounded-4 shadow bg-white border-0";
         li.innerHTML = `
-      <span class="d-flex gap-5 fs-4">
+      <span class="col gap-5 fs-5">
         <strong>${v.nom}</strong> —
         <span class="${color} fw-bold">${sign}${v.montant} MAD</span>
         <span> ${v.formattedDate} </span>
       </span>
-      <div class="btn-group">
+      <div class="col btn-group p-4 gap-3">
         <button class="btn btn-warning btn-sm" onclick="editVersement(${index})">Modifier</button>
         <button class="btn btn-danger btn-sm" onclick="deleteVersement(${index})">Supprimer</button>
       </div>
