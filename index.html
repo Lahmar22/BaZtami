@@ -12,19 +12,22 @@
 <body>
 
 
-  <div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="d-flex flex-column justify-content-center align-items-center vh-100">
+
+    <img src="images/logobank1.png" alt="logobank1" style="height: 120px; margin-bottom: 20px;">
+
     <div class="card p-4 shadow" style="width: 350px;">
 
       <h4 class="text-center mb-4">Login</h4>
 
       <input type="text" id="username" class="form-control mb-3" placeholder="Enter username">
-
       <input type="password" id="password" class="form-control mb-3" placeholder="Enter password">
 
       <button onclick="login()" class="btn btn-primary w-100">Login</button>
 
     </div>
   </div>
+
 
   <script>
     function login() {
